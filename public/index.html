@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCL Innovación | Día Mundial de la Creatividad</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ESCENA: REGISTRO -->
+  <section id="scene-registro" class="card">
+    <h1>CCL · Día Mundial de la Creatividad e Innovación</h1>
+    <p class="subtitle">19 misiones. 1 empresa. Que gane el mejor proceso.</p>
+    <label for="aliasInput" style="font-size:13px;font-weight:700;color:var(--ccl-gris-oscuro);">TU ALIAS</label>
+    <input type="text" id="aliasInput" placeholder="Ej: Halcón Logístico" maxlength="20" style="margin-top:6px;">
+    <div class="row">
+      <button class="btn-primary" id="btnJoin">Entrar al Lobby</button>
+      <button class="btn-outline" id="btnShowAdmin">Soy Administrador</button>
+    </div>
+    <div id="adminLoginBox" class="hidden" style="margin-top:14px;">
+      <input type="text" id="adminCodeInput" placeholder="Código de administrador">
+      <div class="row"><button class="btn-success" id="btnAdminJoin">Ingresar como Admin</button></div>
+    </div>
+    <p id="errorMsg" style="color:var(--ccl-error);margin-top:10px;font-weight:600;"></p>
+  </section>
+
+  <!-- ESCENA: LOBBY -->
+  <section id="scene-lobby" class="card hidden">
+    <h2>Lobby de Espera <span class="badge" id="lobbyCount">0</span></h2>
+    <p class="subtitle">Esperando a que el Administrador seleccione e inicie la misión...</p>
+    <div id="lobbyPlayers" class="player-grid"></div>
+  </section>
+
+  <!-- ESCENA: PANEL ADMIN -->
+  <section id="scene-admin" class="card hidden">
+    <h2>Panel de Administrador <span class="badge" id="adminCount">0 jugadores</span></h2>
+    <div id="missionWorlds"></div>
+    <div class="row" style="align-items:center;">
+      <label for="durationInput" style="font-size:13px;font-weight:700;color:var(--ccl-gris-oscuro);">Duración (minutos):</label>
+      <input type="number" id="durationInput" min="1" max="15" value="5" style="width:70px;padding:8px;border:2px solid var(--ccl-gris-medio);border-radius:8px;">
+    </div>
+    <div class="row">
+      <button class="btn-success" id="btnStartMatch">▶ Iniciar Misión</button>
+    </div>
+  </section>
+
+  <!-- ESCENA: VISTA EN VIVO DEL ADMINISTRADOR (durante la partida) -->
+  <section id="scene-admin-live" class="card hidden">
+    <h2>🎮 Partida en curso: <span id="adminLiveMission"></span></h2>
+    <div class="row" style="align-items:center;justify-content:space-between;">
+      <span id="adminLiveTimer" style="font-size:28px;font-weight:800;color:var(--ccl-azul);">05:00</span>
+      <button class="btn-danger" id="btnForceEndLive">■ Finalizar Partida Ahora</button>
+    </div>
+    <h3 style="margin-top:20px;">Marcador en vivo</h3>
+    <div id="adminLiveScores"></div>
+  </section>
+
+  <!-- ESCENA: PARTIDA -->
+  <section id="scene-match" class="card hidden" style="padding:0;overflow:hidden;">
+    <div id="hud">
+      <span id="hudMission">Misión</span>
+      <span id="hudTimer">05:00</span>
+      <span class="mult" id="hudMultiplier">x1.0</span>
+      <span id="hudScore">0 pts</span>
+    </div>
+    <div id="gameCanvasWrap">
+      <canvas id="gameCanvas" width="700" height="420"></canvas>
+      <div id="missionControls"></div>
+    </div>
+  </section>
+
+  <!-- ESCENA: RANKING -->
+  <section id="scene-ranking" class="card hidden">
+    <h2>🏆 Ranking Final</h2>
+    <div id="rankingList"></div>
+    <p class="subtitle" style="margin-top:14px;">Volviendo al lobby automáticamente...</p>
+  </section>
+
+</div>
+
+<!-- POPUP PREGUNTA -->
+<div id="questionOverlay" class="hidden">
+  <div id="questionCard" class="card">
+    <h3 id="questionText">Pregunta</h3>
+    <div id="questionOptions"></div>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/engine/canvasEngine.js"></script>
+<script src="js/missions/gi_lemmings.js"></script>
+<script src="js/missions/gp_simcity.js"></script>
+<script src="js/missions/pe_pipemania.js"></script>
+<script src="js/missions/gc_drmario.js"></script>
+<script src="js/missions/gf_paperboy.js"></script>
+<script src="js/missions/gh_duckhunt.js"></script>
+<script src="js/missions/sf_waldo.js"></script>
+<script src="js/missions/jr_operationwolf.js"></script>
+<script src="js/missions/tc_tetris.js"></script>
+<script src="js/missions/se_spaceinvaders.js"></script>
+<script src="js/missions/ga_qbert.js"></script>
+<script src="js/missions/st_whacamole.js"></script>
+<script src="js/missions/co_priceisright.js"></script>
+<script src="js/missions/sa_tapper.js"></script>
+<script src="js/missions/sc_pong.js"></script>
+<script src="js/missions/ld_burgertime.js"></script>
+<script src="js/missions/ca_cargotetris.js"></script>
+<script src="js/missions/in_galaga.js"></script>
+<script src="js/missions/la_donkeykong.js"></script>
+<script src="js/missionRegistry.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
